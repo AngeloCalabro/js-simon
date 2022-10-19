@@ -55,8 +55,11 @@ function play() {
     // Funzione per chiedere i numeri all'utente
     function sendNumber() {
         // ciclo per controllo numeri
+        // let perdita = false;
         // for (let i = 0; i < arrayNum; i++) {
-
+        // if(arrayNumberClient[i] != arrayNum; i++){
+        // perdita = true;
+        // }
         // }
 
         // creare un altra array per numeri inseriti dall'utente
@@ -66,16 +69,19 @@ function play() {
             inputNumberHtml.value = '';
 
             console.log(inputNumberClient);
+
             // se il numero è incluso nell'arrey, se no continuo
-            if (numeri.includes(inputNumberClient)) {
-                console.log('bravo');
+            if (!numeri.includes(inputNumberClient)) {
+                console.log('riprova');
 
             } else {
-                console.log('riprova');
+                console.log('bravo');
             }
         } else {
             btnSendHtml.removeEventListener('click', sendNumber);
             console.log('Finito di inserire i numeri')
+            arrayNum--;
+            viewNumber.innerHTML = `I numeri da te inseriti sono: ${arrayNumberClient.join(' - ')}`
         }
 
         // checkNumber();
