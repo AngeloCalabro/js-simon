@@ -3,13 +3,10 @@
 // Dopo che sono stati inseriti i 5 numeri, il software dice quanti e quali dei numeri da indovinare sono stati individuati.
 
 // aggiungere un tag HTML alla pagina per visualizzare i numeri
-const btnGeneraNumHtml = document.getElementById('generaNumber')
-
-// creo l'arrey per accogliere i 5 numeri randomici;
-// randomNumber(min, max);
+const btnGeneraNumHtml = document.getElementById('generaNumber');
 
 // mi metto i 5 numeri in una variabile
-let arrayNum = 5
+let arrayNum = 5;
 
 //preparare arrey
 let numeri = [];
@@ -28,14 +25,10 @@ function play() {
             numeri.push(numeroGen);
         }
     };
-    console.log(numeri)
+    console.log(numeri);
 
-    // prendo il div dal HTML
-    const viewNumber = document.getElementById('view-num');
-    viewNumber.innerHTML = numeri;
-
-    //Timer 5 secondi
-    let counter = 1;
+    //Timer in secondi
+    let counter = 2;
     let num = document.getElementById('timer')
     const countdown = setInterval(() => {
         if (counter === 0) {
@@ -46,42 +39,61 @@ function play() {
             // Rimuovere classe display none
             inputNumberHtml.classList.remove("d-none")
             btnSendHtml.classList.remove("d-none")
-
         } else {
             num.innerHTML = counter;
             counter--;
         }
     }, 1000);
 
+    // Array dei numeri inseriti dal cliente
     let arrayNumberClient = [];
+
+    // prendo il div dall HTML
+    const viewNumber = document.getElementById('view-num');
+    viewNumber.innerHTML = `Ricordati questi numeri:<br>${numeri.join(' - ')}`;
 
     // Funzione per chiedere i numeri all'utente
     function sendNumber() {
-        //creare un altra array per numeri inseriti dall'utente
+        // ciclo per controllo numeri
+        // for (let i = 0; i < arrayNum; i++) {
+
+        // }
+
+        // creare un altra array per numeri inseriti dall'utente
         if (arrayNumberClient.length < arrayNum) {
             let inputNumberClient = parseInt(inputNumberHtml.value);
             arrayNumberClient.push(inputNumberClient);
+            inputNumberHtml.value = '';
+
             console.log(inputNumberClient);
+            // se il numero è incluso nell'arrey, se no continuo
             if (numeri.includes(inputNumberClient)) {
-                console.log('bravo')
+                console.log('bravo');
+
             } else {
-                console.log('riprova')
+                console.log('riprova');
             }
         } else {
-            btnSendHtml.removeEventListener('click', sendNumber)
+            btnSendHtml.removeEventListener('click', sendNumber);
+            console.log('Finito di inserire i numeri')
         }
-        console.log(arrayNumberClient)
 
-        //creare un altra array per numeri inseriti dall'utente
+        // checkNumber();
+        console.log(arrayNumberClient);
 
-        //funzione che controlla l'arrey creata dall'utente
+
 
     };
 
     //Clicca l'utente per inserire i numeri
     btnSendHtml.addEventListener('click', sendNumber);
 
-}
+    // Funzione che controlla l'arrey creata dall'utente
+    // function checkNumber() {
+
+    // }
+
+};
 
 //Clicca per generare i numeri
 btnGeneraNumHtml.addEventListener('click', play);
